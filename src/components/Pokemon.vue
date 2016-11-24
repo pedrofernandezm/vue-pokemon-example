@@ -1,7 +1,12 @@
 <template>
-  <div class="text-center">
-    <img :src="pokemonAnimated" >
-    <h1>{{ selectedPokemon.name }}</h1>
+  <div class="text-center" >
+    <div v-if="selectedPokemon.name">
+      <img :src="pokemonAnimated" alt="No pokemon selected">
+      <h1>{{ selectedPokemon.name }}</h1>
+    </div>
+    <div v-else>
+      <p>Please select a pokemon from the list</p>
+    </div>
   </div>
 </template>
 

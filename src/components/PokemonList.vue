@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-3">
+  <div>
     <h1>Pokemons</h1>
     <table class="table">
       <thead>
