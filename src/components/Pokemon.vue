@@ -1,23 +1,36 @@
 <template>
   <div class="text-center" >
-    <div v-if="selectedPokemon.name">
-      <img :src="pokemonAnimated" alt="No pokemon selected">
-      <h1>{{ selectedPokemon.name }}</h1>
-    </div>
-    <div v-else>
-      <p>Please select a pokemon from the list</p>
-    </div>
+    <template v-if="loading">
+      <spinner></spinner>
+    </template>
+    <template v-else>
+      <div v-if="selectedPokemon.name">
+        <img :src="pokemonAnimated" :alt="selectedPokemon.name">
+        <h1>{{ selectedPokemon.name }}</h1>
+      </div>
+      <div v-else>
+        <p>Please select a pokemon from the list</p>
+      </div>
+      <stats v-bind:selected-pokemon="selectedPokemon"></stats>
+    </template>
   </div>
 </template>
 
 <script>
 
+import Spinner from './Spinner';
+import Stats from './Stats';
+
 export default {
   name: 'pokemon',
-  props: ['selectedPokemon'],
+  props: ['selectedPokemon', 'loading'],
+  components: {
+    Spinner,
+    Stats,
+  },
   computed: {
     pokemonAnimated() {
-      return `http://pokegifs.surge.sh/${this.selectedPokemon.id}.gif`;
+      return `http://pokemongifs.surge.sh/${this.selectedPokemon.name}.gif`;
     },
   },
 };

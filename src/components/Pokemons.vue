@@ -4,8 +4,7 @@
       <pokemon-list v-bind:pokemons="pokemons" :select-pokemon="selectPokemon"></pokemon-list>
     </div>
     <div class="col-md-9">
-      <pokemon v-bind:selected-pokemon="selectedPokemon"></pokemon>
-      <stats v-bind:selected-pokemon="selectedPokemon"></stats>
+      <pokemon v-bind:selected-pokemon="selectedPokemon" v-bind:loading="loading"></pokemon>
     </div>
   </div>
 </template>
@@ -14,14 +13,12 @@
 import axios from 'axios';
 import PokemonList from './PokemonList';
 import Pokemon from './Pokemon';
-import Stats from './Stats';
 
 export default {
   name: 'pokemons',
   components: {
     PokemonList,
     Pokemon,
-    Stats,
   },
   created() {
     axios.get('http://pokeapi.co/api/v2/pokemon')
@@ -31,9 +28,12 @@ export default {
   },
   methods: {
     selectPokemon(url) {
+      this.loading = true;
+      this.selectedPokemon = {};
       axios.get(url)
         .then((response) => {
           this.selectedPokemon = response.data;
+          this.loading = false;
         });
     },
   },
@@ -48,6 +48,7 @@ export default {
         },
         stats: [],
       },
+      loading: false,
     };
   },
 };
