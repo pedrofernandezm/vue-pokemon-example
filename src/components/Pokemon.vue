@@ -1,7 +1,7 @@
 <template>
   <div class="text-center" >
     <template v-if="loading">
-      <spinner></spinner>
+      <spinner :spin="spin"></spinner>
     </template>
     <template v-else>
       <div v-if="selectedPokemon.name">
@@ -33,6 +33,12 @@ export default {
       return `http://pokemongifs.surge.sh/${this.selectedPokemon.name}.gif`;
     },
   },
+  data() {
+    return {
+      spin: 'pacman',
+    };
+  },
+
 };
 </script>
 

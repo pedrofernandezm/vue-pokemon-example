@@ -1,18 +1,26 @@
-<template>
-  <div class="spinner">
-    <pacman-loader></pacman-loader>
-  </div>
-</template>
-
 <script>
 
 import PacmanLoader from 'vue-spinner/src/PacmanLoader';
+import BounceLoader from 'vue-spinner/src/BounceLoader';
 
 export default {
   name: 'spinner',
   components: {
     PacmanLoader,
+    BounceLoader,
   },
+  render: function a(createElement) {
+    return createElement(
+      'div',
+      {
+        class: {
+          spinner: true,
+        },
+      },
+      [createElement(`${this.spin}-loader`)]
+    );
+  },
+  props: ['spin'],
 };
 </script>
 
